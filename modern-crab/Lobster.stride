@@ -6,14 +6,73 @@
         <import target="greenfoot.*" enable="true"/>
     </imports>
     <implements/>
-    <fields/>
-    <constructors/>
+    <fields>
+        <variable access="private" type="int" type-java="int" name="crabEaten" enable="true"/>
+    </fields>
+    <constructors>
+        <constructor access="public" enable="true">
+            <javadoc xml:space="preserve">//number of crab eaten is 0</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <assign dest="crabEaten" dest-java="crabEaten" src="0" src-java="0" enable="true"/>
+            </body>
+        </constructor>
+    </constructors>
     <methods>
+        <method access="public" type="boolean" type-java="boolean" name="foundCrab" enable="true">
+            <javadoc xml:space="preserve">//see if lobster and crab are on the same location</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="Actor" type-java="Actor" name="crab" value="getOneObjectAtOffset(0,0,Crab.class)" value-java="getOneObjectAtOffset(0, 0, Crab.class)" enable="true"/>
+                <return value="crab!=null" value-java="crab != null" enable="true"/>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="eatCrab" enable="true">
+            <javadoc xml:space="preserve">//eat the crab if it is on the same location</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="Actor" type-java="Actor" name="crab" value="getOneObjectAtOffset(0,0,Crab.class)" value-java="getOneObjectAtOffset(0, 0, Crab.class)" enable="true"/>
+                <if condition="crab!=null" condition-java="crab != null" enable="true">
+                    <ifStatements>
+                        <call expression="getWorld().removeObject(crab)" expression-java="getWorld().removeObject(crab)" enable="true"/>
+                        <assign dest="crabEaten" dest-java="crabEaten" src="crabEaten+1" src-java="crabEaten + 1" enable="true"/>
+                    </ifStatements>
+                </if>
+            </body>
+        </method>
+        <method access="public" type="int" type-java="int" name="getCrabEaten" enable="true">
+            <javadoc xml:space="preserve">//see how many crab eaten</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <return value="crabEaten" value-java="crabEaten" enable="true"/>
+            </body>
+        </method>
         <method access="public" type="void" type-java="void" name="act" enable="true">
             <javadoc xml:space="preserve">Act - do whatever the Lobster wants to do. This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.</javadoc>
             <params/>
             <throws/>
-            <body/>
+            <body>
+                <call expression="move(5)" expression-java="move(5)" enable="true"/>
+                <if condition="Greenfoot.isKeyDown(&quot;a&quot;)" condition-java="Greenfoot.isKeyDown(&quot;a&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="turn(4)" expression-java="turn(4)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;d&quot;)" condition-java="Greenfoot.isKeyDown(&quot;d&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="turn(-4)" expression-java="turn(-4)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="foundCrab()" condition-java="foundCrab()" enable="true">
+                    <ifStatements>
+                        <call expression="eatCrab()" expression-java="eatCrab()" enable="true"/>
+                    </ifStatements>
+                </if>
+            </body>
         </method>
     </methods>
 </class>
